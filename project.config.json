@@ -12,6 +12,10 @@
 	"appid": "wxe9ddca3d07f881ee",
 	"projectname": "mpvue-weui",
 	"condition": {
+		"my":{
+			"current": -1,
+			"list": []
+		},
 		"search": {
 			"current": -1,
 			"list": []

@@ -1,3 +1,5 @@
+
+
 <template>
   <div class="page">
     <div class="page__hd">
@@ -10,45 +12,74 @@
       <div class="mpvueInfo-desc" v-show="showMpvueInfo">{{mpvueInfo}}</div>
       <button type="primary" class="mt-15" @click="turnToVuexPage">点击跳转</button>
     </div>
+    <t-dialog :show.sync="showDialog"></t-dialog>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex';
+// import Fly from "flyio/dist/npm/wx";
+import dialog from "@/components/dialog-index";
+import { mapGetters, mapMutations } from "vuex";
 export default {
   data() {
     return {
-      stateMpvueInfo: '',
-      showMpvueInfo: false
-    }
+      stateMpvueInfo: "",
+      showMpvueInfo: false,
+      showDialog: false
+    };
   },
-  mounted() {
-    console.log(this.mpvueInfo);
+  getNewsData: function(type) {},
+  async onLoad(options) {
+    this.showDialog=true;
+    console.log(`url携带的参数为: ${JSON.stringify(options)}`);
+    wx.showLoading({
+      title: "加载中",
+      mask: true
+    });
+    // const sojson = await this.$store.dispatch("getSojson", "北京");
+    const qq = await this.$store.dispatch("getQQMusic", '934858124');
+    console.log(this.mpvueInfo, this.$store, qq);
+
+
+    wx.hideLoading();
+    // let fly = new Fly(); // 创建fly实例
+    // fly
+    //   .get("https://www.sojson.com/open/api/weather/json.shtml", {
+    //     city: "北京"
+    //   })
+    //   .then(res => {
+    //     wx.hideLoading();
+    //     console.info(res.data);
+    //     // this.contentNewsList = ;
+    //   });
   },
   methods: {
     ...mapMutations({
-      setMpvueInfoVuex: 'SET_MPVUEINFO'
+      setMpvueInfoVuex: "SET_MPVUEINFO"
     }),
     turnToVuexPage() {
       wx.navigateTo({
-        url: '/pages/vuexPage/main'
-      })
+        url: "/pages/vuexPage/main"
+      });
     },
     getMpvueInfo() {
-      this.showMpvueInfo =!this.showMpvueInfo;
-      // this.setMpvueInfoVuex(this.state.mpvueInfo);
+      console.info(this);
+      this.showMpvueInfo = !this.showMpvueInfo;
+      this.setMpvueInfoVuex(this.mpvueInfo);
     },
     commitMpvueInfo() {
-      let mpvueInfoUpate = '基于 Vue.js 的小程序开发框架，从底层支持 Vue.js 语法和构建工具体系。---created by 美团点评'
+      let mpvueInfoUpate =
+        "基于1 Vue.js 的小程序开发框架，从底层支持 Vue.js 语法和构建工具体系。created by 美团点评";
       this.setMpvueInfoVuex(mpvueInfoUpate);
     }
   },
   computed: {
-    ...mapGetters([
-      'mpvueInfo'
-    ])
+    ...mapGetters(["mpvueInfo"])
+  },
+  components: {
+    "t-dialog": dialog
   }
-}
+};
 </script>
 
 <style>

@@ -35,53 +35,59 @@ export default {
     return {
       list: [
         {
-          id: 'form',
-          name: '表单',
-          open: false,
-          pages: ['button', 'list', 'input', 'slider', 'uploader']
+          id: "my",
+          name: "我的测试",
+          open: true,
+          pages: ["qqmusic"]
         },
         {
-          id: 'widget',
-          name: '基础组件',
+          id: "form",
+          name: "表单",
+          open: false,
+          pages: ["button", "list", "input", "slider", "uploader"]
+        },
+        {
+          id: "widget",
+          name: "基础组件",
           open: false,
           pages: [
-            'article',
-            'badge',
-            'flex',
-            'footer',
-            'gallery',
-            'grid',
-            'icons',
-            'loadmore',
-            'panel',
-            'preview',
-            'progress',
-            'swiper'
+            "article",
+            "badge",
+            "flex",
+            "footer",
+            "gallery",
+            "grid",
+            "icons",
+            "loadmore",
+            "panel",
+            "preview",
+            "progress",
+            "swiper"
           ]
         },
         {
-          id: 'feedback',
-          name: '操作反馈',
+          id: "feedback",
+          name: "操作反馈",
           open: false,
-          pages: ['actionsheet', 'dialog', 'msg', 'picker', 'toast']
+          pages: ["actionsheet", "dialog", "msg", "picker", "toast"]
         },
         {
-          id: 'nav',
-          name: '导航相关',
+          id: "nav",
+          name: "导航相关",
           open: false,
-          pages: ['navbar', 'tabbar']
+          pages: ["navbar", "tabbar"]
         },
         {
-          id: 'search',
-          name: '搜索相关',
+          id: "search",
+          name: "搜索相关",
           open: false,
-          pages: ['searchbar']
+          pages: ["searchbar"]
         },
         {
-          id: 'issues',
-          name: 'issues 需求',
+          id: "issues",
+          name: "issues 需求",
           open: false,
-          pages: ['request', 'vuex', 'rate']
+          pages: ["request", "vuex", "rate"]
         }
       ]
     };
@@ -105,7 +111,7 @@ export default {
     }
   },
 
-  created() { }
+  created() {}
 };
 </script>
 

@@ -20,6 +20,7 @@
         "pages/progress/main",
         "pages/swiper/main",
 
+        
         "pages/actionsheet/main",
         "pages/dialog/main",
         "pages/msg/main",
@@ -39,7 +40,10 @@
         "pages/rate/main",
 
         "pages/test/main",
-        "pages/componentsTest/main"
+        "pages/componentsTest/main",
+
+        "pages/qqmusic/main",
+        "pages/musicdetails/main"
 
     ],
     "window": {
