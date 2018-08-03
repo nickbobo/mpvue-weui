@@ -10,7 +10,7 @@
       <div class="weui-cells__title">单选列表项</div>
       <div class="weui-cells weui-cells_after-title">
         <radio-group @change="radioChange">
-          <label class="weui-cell weui-check__label" v-for="item in radioItems" :key="index">
+          <label class="weui-cell weui-check__label" v-for="(index,item) in radioItems" :key="index">
             <radio class="weui-check" :value="item.value" :checked="item.checked" />
             <div class="weui-cell__bd">{{item.name}}</div>
             <div class="weui-cell__ft weui-cell__ft_in-radio" v-if="item.checked">

@@ -9,7 +9,7 @@
       <div class="weui-cells__title">{{rateScore}}</div>
       <div class="weui-rate-wrap">
         <ul class="weui-rate">
-          <li class="weui-rate-item" v-for="n in max" :key="index" :class="{'weui-rate-item-active' : index <= tempValue}" :data-index='index' @click="selectRate">
+          <li class="weui-rate-item" v-for="(index,items) in max" :key="index" :class="{'weui-rate-item-active' : index <= tempValue}" :data-index='index' @click="selectRate">
             <div class="weui-rate-item-def"></div>
           </li>
         </ul>
