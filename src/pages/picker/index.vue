@@ -18,8 +18,11 @@
         <picker class="weui-btn" mode="date" :value="date" start="2015-09-01" end="2017-09-01" @change="bindDateChange">
           <button type="default">日期选择器</button>
         </picker>
-        <picker class="weui-btn" mode="region" :value="region" @click="CityChange">
+        <picker class="weui-btn" mode="region" :range="region" @change="CityChange">
           <button type="default">城市选择器</button>
+          <view class="picker">
+    当前选择：{{region[0]}}，{{region[1]}}，{{region[2]}}
+  </view>
         </picker>
         <button type="default" class="weui-btn" @click="multiLinkagePicker">多级联动</button>
       </div>
@@ -57,11 +60,13 @@ export default {
       console.log('选中的日期为：' + e.mp.detail.value);
     },
     CityChange(e) {
+      console.info(e.mp)
+      this.region = e.mp.detail.value;
       console.log('选中的城市为：' + e.mp.detail.value);
     },
     multiLinkagePicker() {
       wx.navigateTo({
-        url: '../mulLinkagePicker/mulLinkagePicker'
+        url: '/pages/mulLinkagePicker/main'
       })
     }
   }

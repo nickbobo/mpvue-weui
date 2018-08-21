@@ -17,7 +17,7 @@
           <div class='list-item'>
             <div class='list-item-content'>
               <div class='list-item-left'>
-                <image :src="item.thumbnail_pic_s"></image>
+                <image :src="item.thumbnail_pic_s"/>
               </div>
               <div class='list-item-right'>
                 <div class='article-title'>{{item.title}}</div>

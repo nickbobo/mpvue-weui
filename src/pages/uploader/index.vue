@@ -21,7 +21,7 @@
                       <div class="delete-icon" @click="deleteImg" :id="item"></div>
                     </div>
                   </div>
-                  <div class="weui-uploader__file">
+      <div class="weui-uploader__file">
                     <image class="weui-uploader__img" src="/static/images/pic_160.png" mode="aspectFill" />
                   </div>
                   <div class="weui-uploader__file">

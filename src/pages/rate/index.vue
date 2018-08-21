@@ -9,7 +9,17 @@
       <div class="weui-cells__title">{{rateScore}}</div>
       <div class="weui-rate-wrap">
         <ul class="weui-rate">
-          <li class="weui-rate-item" v-for="(index,items) in max" :key="index" :class="{'weui-rate-item-active' : index <= tempValue}" :data-index='index' @click="selectRate">
+          <li class="weui-rate-item" v-for="(k,index) in rateScoreDesc" :key="index" 
+          :class="{'weui-rate-item-active' : index <= tempValue}" :data-index='index' :data-comkey='index' @click="selectRate">
+            <div class="weui-rate-item-def"></div>
+          </li>
+        </ul>
+      </div>
+
+            <div class="weui-rate-wrap">
+        <ul class="weui-rate">
+          <li class="weui-rate-item" v-for="(k,index) in rateScoreDesc" :key="index" 
+          :class="{'weui-rate-item-active' : index <= tempValue}" :data-index='index' :data-comkey='index' @click="selectRate">
             <div class="weui-rate-item-def"></div>
           </li>
         </ul>
@@ -30,6 +40,7 @@ export default {
   },
   methods: {
     selectRate(e) {
+      console.info(e.mp.currentTarget);
       this.tempValue = e.mp.currentTarget.dataset.index;
       this.rateScore = this.rateScoreDesc[this.tempValue];
     }

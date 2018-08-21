@@ -87,7 +87,8 @@ export const getRequest = obj => new Promise((resolve, reject) => {
     header: { 'content-type': 'application/json', ...obj.header },
     method: obj.method,
     success(res) {
-      resolve(res.data.data)
+      console.info(res)
+      resolve(res.data)
     },
     fail(e) {
       console.log(e)

@@ -6,7 +6,6 @@
         "pages/input/main",
         "pages/slider/main",
         "pages/uploader/main",
-
         "pages/article/main",
         "pages/badge/main",
         "pages/flex/main",
@@ -19,8 +18,6 @@
         "pages/preview/main",
         "pages/progress/main",
         "pages/swiper/main",
-
-        
         "pages/actionsheet/main",
         "pages/dialog/main",
         "pages/msg/main",
@@ -31,25 +28,39 @@
         "pages/toast/main",
         "pages/navbar/main",
         "pages/tabbar/main",
-
         "pages/searchbar/main",
-
         "pages/request/main",
         "pages/vuex/main",
         "pages/vuexPage/main",
         "pages/rate/main",
-
         "pages/test/main",
         "pages/componentsTest/main",
-
         "pages/qqmusic/main",
+        "pages/baidu-music/main",
         "pages/musicdetails/main"
-
     ],
     "window": {
         "backgroundTextStyle": "light",
         "navigationBarBackgroundColor": "#fff",
         "navigationBarTitleText": "weui for mpvue",
         "navigationBarTextStyle": "black"
+    },
+    "tabBar": {
+        "selectedColor": "#EA5149",
+        "borderStyle":"white",
+        "list": [
+            {
+                "pagePath": "pages/index/main",
+                "text": "首页",
+                "iconPath": "static/img/home.png",
+                "selectedIconPath": "static/img/home-active.png"
+            },
+            {
+                "pagePath": "pages/baidu-music/main",
+                "text": "我的",
+                "iconPath": "static/img/me.png",
+                "selectedIconPath": "static/img/me_active.png"
+            }
+        ]
     }
 }

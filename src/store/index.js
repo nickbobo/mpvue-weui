@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import state from './state';
 import mutations from './mutations';
-import * as getters from './getters';
+
 // import * as actions from './actions';
 import api from './api'
 import { request, getRequest } from '../utils/wx'
@@ -29,7 +29,20 @@ export default new Vuex.Store({ // eslint-disable-line
         // data: {}
       })
       return res
+    },
+    async getBDSoJson({ commit }, songName) {
+      const res = await getRequest({
+        method: 'GET',
+        url: `${api.kwsong}?all=${songName}${api.kwsongjson}`
+      })
+      return res
+    },
+    async getSongMp3({ commit }, musicId) {
+      const res = await getRequest({
+        method: 'GET',
+        url: `${api.kwsong}?type=convert_url&rid=${musicId}&format=mp3&response=url`
+      })
+      return res
     }
-  },
-  getters
+  }
 });

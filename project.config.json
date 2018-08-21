@@ -1,7 +1,7 @@
 {
 	"description": "项目配置文件。",
 	"setting": {
-		"urlCheck": true,
+		"urlCheck": false,
 		"es6": false,
 		"postcss": true,
 		"minified": true,
@@ -12,7 +12,7 @@
 	"appid": "wxe9ddca3d07f881ee",
 	"projectname": "mpvue-weui",
 	"condition": {
-		"my":{
+		"my": {
 			"current": -1,
 			"list": []
 		},
