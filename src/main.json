@@ -37,7 +37,8 @@
         "pages/componentsTest/main",
         "pages/qqmusic/main",
         "pages/baidu-music/main",
-        "pages/musicdetails/main"
+        "pages/musicdetails/main",
+        "pages/music-play/main"
     ],
     "window": {
         "backgroundTextStyle": "light",
@@ -47,7 +48,7 @@
     },
     "tabBar": {
         "selectedColor": "#EA5149",
-        "borderStyle":"white",
+        "borderStyle": "white",
         "list": [
             {
                 "pagePath": "pages/index/main",

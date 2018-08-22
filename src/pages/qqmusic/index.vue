@@ -22,7 +22,7 @@ export default {
   },
   async onLoad(options) {
     const qqmusicList = await this.$store.dispatch("getQQMusic", "934858124");
-    this.musicList = qqmusicList.playlist;
+    this.musicList = qqmusicList.data.data.playlist;
     console.info(qqmusicList);
   },
   methods: {

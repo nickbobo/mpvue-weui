@@ -40,7 +40,7 @@ export default new Vuex.Store({ // eslint-disable-line
     async getSongMp3({ commit }, musicId) {
       const res = await getRequest({
         method: 'GET',
-        url: `${api.kwsong}?type=convert_url&rid=${musicId}&format=mp3&response=url`
+        url: `https://antiserver.kuwo.cn/anti.s?type=convert_url&rid=${musicId}&format=mp3&response=url`
       })
       return res
     }
