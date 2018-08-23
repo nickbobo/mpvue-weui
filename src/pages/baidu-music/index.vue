@@ -10,9 +10,8 @@
         </div>
       </div>
       <div class="page__bd page__bd_spacing">
-        <button class="weui-btn mini-btn" type="primary" size="mini" @click="onSongSearch">搜索</button>
+        <button class="weui-btn mini-btn" type="primary" size="mini" @click="getSongList">搜索</button>
       </div>
-
       <div>
         <ul class="song_list" v-for="(items,index) in songList" :key="index" @click="goTOPlay(items)">
           <li>{{items.NAME}}{{items.ARTIST}}</li>
@@ -21,14 +20,11 @@
     </div>
   </div>
 </template>
-
 <script>
-// Use Vuex
-
 export default {
   data() {
     return {
-      searchSongName: "蓝莲花",
+      searchSongName: "一百万个可能",
       songList: []
     };
   },
@@ -36,42 +32,22 @@ export default {
     let Fn = Function; //一个变量指向Function，防止有些前端编译工具报错
     return new Fn("return " + fn)();
   },
-  async onLoad(options) {
-    const songList = await this.$store.dispatch(
-      "getBDSoJson",
-      this.searchSongName
-    );
-    // console.info(songList.data);
-    // this.songList = songList.obslist;
-    // this.musicList = songList.playlist;
-    // let jsonSong = JSON.parse(songList)
-    // let data_obj = this.eval("(" + songList.data + ")");
-    let song = songList.data.replace(/'/g, '"');
-    // let songStr = "'" + song + "'";
-    let jsonSong = JSON.parse(song);
-    console.info(jsonSong);
-    this.songList = jsonSong.abslist;
-
-    // console.info(data_obj);
+  onLoad(options) {
+    this.getSongList();
   },
   methods: {
-    async onSongSearch() {
+    async getSongList() {
       const songList = await this.$store.dispatch(
         "getBDSoJson",
         this.searchSongName
       );
       this.songList = songList.obslist;
-    let song = songList.data.replace(/'/g, '"');
-    // let songStr = "'" + song + "'";
-    let jsonSong = JSON.parse(song);
-    console.info(jsonSong);
-    this.songList = jsonSong.abslist;
+      let song = songList.data.replace(/'/g, '"');
+      let jsonSong = JSON.parse(song);
+      this.songList = jsonSong.abslist;
     },
     goTOPlay(items) {
-      console.info(items);
       let data = JSON.stringify(items);
-      // console.info(e.mp.currentTarget.dataset.index)
-      console.info(data);
       wx.setStorage({
         key: "songData",
         data: data
