@@ -1,16 +1,27 @@
 <template>
   <div class="page">
-    <span>{{data.NAME}} {{data.ARTIST}} </span>
-    <audio :poster="poster" :name="data.NAME" :author="data.ARTIST" :src="src" id="myAudio"></audio>
-    <div class="page__bd page__bd_spacing">
-      <button class="weui-btn mini-btn" @click="play" size="mini">{{playStatus?"播放":"暂停"}}</button>
-      <button class="weui-btn mini-btn" @click="onPlaySeek" size="mini">快进15秒</button>
-    </div>
-
     <progress :percent="songProgress" stroke-width="3" />
-    <slider class="progress_slider" step="1" :value="songLeng" min=0 :max="songMax" blockSize=10 blockImageWidth="5" @change="goSongPosition" backgroundColor="#373636" activeColor="#FF1744" />
-    <span>-{{songTime}}</span>
-    <span>{{time2}}</span>
+    <div class="align_cen song_name">{{data.NAME}}</div>
+    <div class="align_cen">——{{data.ARTIST}}——</div>
+    <audio :poster="poster" :name="data.NAME" :author="data.ARTIST" :src="src" id="myAudio"></audio>
+    <div class=" song_but">
+      <button class="weui-btn" @click="upperSong" size="mini">上一曲</button>
+      <button class="weui-btn" @click="onPlayByPause" size="mini">{{playStatus?"播放":"暂停"}}</button>
+      <button class="weui-btn" @click="nextSong" size="mini">下一曲</button>
+      
+      
+    </div>
+    <div class="song_but">
+      <button class="weui-btn" @click="onPlaySeek(true)" size="mini">快退15秒</button>
+<button class="weui-btn" @click="onPlaySeek(false)" size="mini">快进15秒</button>
+    </div>
+    <div class="time_progress">
+      <span>{{time2}}</span>
+      <slider class="progress_slider" step="1" :value="songLeng" 
+      min=0 :max="songMax" blockSize=10 blockImageWidth="5" @change="goSongPosition" 
+      backgroundColor="#373636" activeColor="#FF1744" />
+      <span>-{{songTime}}</span>
+    </div>
   </div>
 </template>
 
@@ -25,7 +36,7 @@ export default {
       author: "许巍",
       playStatus: true,
       src: "",
-      songTime: "",
+      songTime: "00:00",
       songTimer: null,
       data: {},
       innerAudioContext: {},
@@ -34,7 +45,9 @@ export default {
       songMax: 411,
       timer2:null,
       time2:"00:00",
-      time2Number:0
+      time2Number:0,
+      songPlayPosition:0,
+      songList:[]
     };
   },
   onLoad() {
@@ -42,7 +55,8 @@ export default {
     wx.getStorage({
       key: "songData",
       success: function(res) {
-        _this.data = JSON.parse(res.data);
+        _this.songList = JSON.parse(res.data);
+        _this.data = _this.songList[0];
         _this.getActionMP3(_this.data);
       }
     });
@@ -50,15 +64,12 @@ export default {
   methods: {
     async getActionMP3(data) {
       this.playStatus = false;
+      // console.info(data);
+      // return;
       const song = await this.$store.dispatch("getSongMp3", data.MUSICRID);
       if (typeof this.innerAudioContext.src != "undefined") {
         this.innerAudioContext.destroy();
       }
-      wx.getBackgroundAudioPlayerState({
-        success: function(res) {
-          console.info(res.status);
-        }
-      });
       this.innerAudioContext = {};
       this.innerAudioContext = wx.createInnerAudioContext();
       this.innerAudioContext.autoplay = true;
@@ -66,10 +77,6 @@ export default {
       this.innerAudioContext.volume = 0.2;
       this.innerAudioContext.onPlay(() => {
         console.log("开始播放");
-      });
-      this.innerAudioContext.onError(res => {
-        console.log(res.errMsg);
-        console.log(res.errCode);
       });
 
       //监听播放结束
@@ -90,8 +97,28 @@ export default {
       this.resetTime(this.data.DURATION);
       this.justTimer(0);
     },
-    // 播放
-    play() {
+    //上一曲
+    upperSong(){
+      if(this.songPlayPosition==0){
+        console.info("已经是第一条了")
+        return;
+      }
+      this.songPlayPosition--;
+      this.data = this.songList[this.songPlayPosition];
+      this.getActionMP3(this.data);
+    },
+    //下一曲
+    nextSong(){
+      if(this.songPlayPosition==(this.songList.length-1)){
+        console.info("已经是最后一条了")
+        return;
+      }
+      this.songPlayPosition++;
+      this.data = this.songList[this.songPlayPosition];
+      this.getActionMP3(this.data);
+    },
+    // 播放/暂停
+    onPlayByPause() {
       if (this.playStatus) {
         this.playStatus = false;
         this.innerAudioContext.play();
@@ -112,8 +139,17 @@ export default {
       }
     },
     //快进15秒
-    onPlaySeek() {
-      this.songLeng += 15;
+    onPlaySeek(state) {
+      console.info(this.songLeng)
+      if(state){
+        this.songLeng -= 15;
+        if(this.songLeng<0){
+          this.songLeng =0;
+        }
+      }else{
+        this.songLeng += 15;
+      }
+      
       this.updateSongPlayTime();
     },
     //拖动
@@ -181,10 +217,23 @@ export default {
 
 <style  lang="stylus" scoped>
 .page {
-  background: #3367d6;
+  background: #78c3ec;
 }
-
+.align_cen
+  text-align center
+  width 100vm
+  font-size 4vm
+.song_name
+  font-size 8vm
+  font-weight bold
+  padding-top 40rpx
 .progress_slider {
-  width: 100px;
+  width: 440rpx;
 }
+.time_progress,.song_but
+  display flex
+  justify-content center
+  align-items center
+  button 
+    margin-top 10rpx
 </style>

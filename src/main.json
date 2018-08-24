@@ -1,5 +1,6 @@
 {
     "pages": [
+        "pages/baidu-music/main",
         "pages/index/main",
         "pages/button/main",
         "pages/list/main",
@@ -36,7 +37,7 @@
         "pages/test/main",
         "pages/componentsTest/main",
         "pages/qqmusic/main",
-        "pages/baidu-music/main",
+        
         "pages/musicdetails/main",
         "pages/music-play/main"
     ],
