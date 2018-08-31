@@ -3,23 +3,22 @@
     <progress :percent="songProgress" stroke-width="3" />
     <div class="align_cen song_name">{{data.NAME}}</div>
     <div class="align_cen">——{{data.ARTIST}}——</div>
-    <audio :poster="poster" :name="data.NAME" :author="data.ARTIST" :src="src" id="myAudio"></audio>
+    <div class="align_cen">——{{songPlayPosition}}/{{songList.length}}——</div>
+    <audio :src="src" id="myAudio"></audio>
     <div class=" song_but">
       <button class="weui-btn" @click="upperSong" size="mini">上一曲</button>
       <button class="weui-btn" @click="onPlayByPause" size="mini">{{playStatus?"播放":"暂停"}}</button>
       <button class="weui-btn" @click="nextSong" size="mini">下一曲</button>
-      
-      
     </div>
     <div class="song_but">
       <button class="weui-btn" @click="onPlaySeek(true)" size="mini">快退15秒</button>
-<button class="weui-btn" @click="onPlaySeek(false)" size="mini">快进15秒</button>
+      <button class="weui-btn" @click="onPlaySeek(false)" size="mini">快进15秒</button>
     </div>
     <div class="time_progress">
       <span>{{time2}}</span>
       <slider class="progress_slider" step="1" :value="songLeng" 
-      min=0 :max="songMax" blockSize=10 blockImageWidth="5" @change="goSongPosition" 
-      backgroundColor="#373636" activeColor="#FF1744" />
+            min=0 :max="songMax" blockSize=10 blockImageWidth="5" @change="goSongPosition" 
+            backgroundColor="#373636" activeColor="#FF1744" />
       <span>-{{songTime}}</span>
     </div>
   </div>
@@ -30,10 +29,6 @@ export default {
   data() {
     return {
       songMp3Url: "",
-      poster:
-        "http://y.gtimg.cn/music/photo_new/T002R300x300M000003rsKF44GyaSk.jpg?max_age=2592000",
-      name: "此时此刻",
-      author: "许巍",
       playStatus: true,
       src: "",
       songTime: "00:00",
@@ -78,7 +73,6 @@ export default {
       this.innerAudioContext.onPlay(() => {
         console.log("开始播放");
       });
-
       //监听播放结束
       this.innerAudioContext.onEnded(() => {
         setTimeout(() => {
@@ -86,9 +80,11 @@ export default {
           this.playStatus = true;
           this.songLeng = 0;
           this.songProgress = 0;
+
+          
+          this.nextSong()
         }, 1000);
       });
-
       this.songLeng = 0;
       this.songProgress = 0;
       this.songMax = this.data.DURATION;
@@ -110,10 +106,10 @@ export default {
     //下一曲
     nextSong(){
       if(this.songPlayPosition==(this.songList.length-1)){
-        console.info("已经是最后一条了")
-        return;
+        this.songPlayPosition=0;
+      }else{
+        this.songPlayPosition++;
       }
-      this.songPlayPosition++;
       this.data = this.songList[this.songPlayPosition];
       this.getActionMP3(this.data);
     },
@@ -130,7 +126,6 @@ export default {
         } else {
           this.updateSongPlayTime();
         }
-        
       } else {
         this.playStatus = true;
         this.innerAudioContext.pause();
@@ -149,7 +144,6 @@ export default {
       }else{
         this.songLeng += 15;
       }
-      
       this.updateSongPlayTime();
     },
     //拖动

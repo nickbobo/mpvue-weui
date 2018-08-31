@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 import state from './state';
 import mutations from './mutations';
 
+import * as getters from './getters';
 // import * as actions from './actions';
 import api from './api'
 import { request, getRequest } from '../utils/wx'
@@ -10,6 +11,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({ // eslint-disable-line
   state,
   mutations,
+
   actions: {
     async getSojson({ commit }, city) {
       console.info(api.sojson, city)
@@ -44,5 +46,7 @@ export default new Vuex.Store({ // eslint-disable-line
       })
       return res
     }
-  }
+  },
+  getters
+
 });

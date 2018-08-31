@@ -41,6 +41,12 @@ export default {
           pages: ["qqmusic"]
         },
         {
+          id: "amap",
+          name: "高德地图",
+          open: true,
+          pages: ["amap"]
+        },
+        {
           id: "form",
           name: "表单",
           open: false,

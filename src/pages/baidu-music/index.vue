@@ -37,7 +37,9 @@ export default {
     return new Fn("return " + fn)();
   },
   onLoad(options) {
+    
     this.getSongList();
+    // window.AudioContext = window.AudioContext || window.webkitAudioContext;
   },
   methods: {
     async getSongList() {

@@ -1,5 +1,6 @@
 {
     "pages": [
+        
         "pages/baidu-music/main",
         "pages/index/main",
         "pages/button/main",
@@ -39,7 +40,9 @@
         "pages/qqmusic/main",
         
         "pages/musicdetails/main",
-        "pages/music-play/main"
+        "pages/music-play/main",
+        
+        "pages/amap/main"
     ],
     "window": {
         "backgroundTextStyle": "light",
