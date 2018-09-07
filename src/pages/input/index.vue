@@ -225,6 +225,11 @@ export default {
       isSwitchChange: false
     }
   },
+  onLoad(){  
+    wx.setNavigationBarTitle({  
+      title:'输入框'  
+    })  
+  }  ,
   methods: {
     checkboxChange(e) {
       console.log('checkbox发生change事件，携带value值为：' + e.mp.detail.value);

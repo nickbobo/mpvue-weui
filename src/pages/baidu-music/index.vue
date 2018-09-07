@@ -39,6 +39,15 @@ export default {
   onLoad(options) {
     
     this.getSongList();
+    wx.onAccelerometerChange(function(res) {
+  console.log(res.x)
+  console.log(res.y)
+  console.log(res.z)
+})
+
+wx.onCompassChange(function (res) {
+  console.log(res.direction)
+})
     // window.AudioContext = window.AudioContext || window.webkitAudioContext;
   },
   methods: {

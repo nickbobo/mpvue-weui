@@ -24,9 +24,15 @@ export default {
       wx.showActionSheet({
         itemList: ['A', 'B', 'C'],
         success: function (res) {
+          console.info(res);
           console.log(res.tapIndex)
         }
       });
+      wx.getSystemInfo({
+        success:(res)=>{
+          console.info(res.screenWidth+"X"+res.screenHeight);
+        }
+      })
     }
   }
 }

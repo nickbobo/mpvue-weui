@@ -7,7 +7,7 @@
     <div class="page__bd">
       <div class="weui-btn-area">
         <picker @change="bindPickerChange" :value="index" :range="array">
-          <button type="default">单列选择器1</button>
+          <button type="default">单列选择器{{arrayValue}}</button>
         </picker>
         <picker class="weui-btn" mode="multiSelector" @change="MultiPickerChange" :value="indexMulPicker" :range="multiArray" @columnchange="MultiPickerColumChange">
           <button type="default">多列选择器</button>
@@ -40,11 +40,13 @@ export default {
       time: '12:01',
       indexMulPicker: [0, 1, 1],
       multiArray: [['无脊柱动物', '脊柱动物'], ['扁性动物', '线形动物', '环节动物', '软体动物', '节肢动物'], ['猪肉绦虫', '吸血虫']],
-      region: ['广东省', '广州市', '海珠区']
+      region: ['广东省', '广州市', '海珠区'],
+      arrayValue:''
     }
   },
   methods: {
     bindPickerChange(e) {
+      this.arrayValue = this.array[e.mp.detail.value];
       console.log('选中的值为：' + this.array[e.mp.detail.value]);
     },
     MultiPickerChange(e) {
