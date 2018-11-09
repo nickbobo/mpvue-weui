@@ -9,6 +9,9 @@
 <script>
 export default {
   props: ['text', 'items'],
+  onLoad(){
+    console.info(this.text)
+  },
   methods: {
     onClick(items) {
       // console.info(id)

@@ -116,7 +116,37 @@ export default {
       this.list = list;
     }
   },
+  // 下拉刷新方法，与methods方法同级
+  onLoad(options) {
+    
+  },
+  onPullDownRefresh() {
+    //        wx.startPullDownRefresh({
+    //     success:function(){
+    //       console.info("下拉了")
+    //         // doing some thing
+    //     },
+    //     fail: function() {
+    //         // doing some thing
+    //     }
+    // })
+    wx.showNavigationBarLoading();
+    setTimeout(() => {
+      wx.hideNavigationBarLoading();
+      wx.stopPullDownRefresh();
+    }, 2000);
 
+    // to doing..
+    // 停止下拉刷新
+    // wx.stopPullDownRefresh();
+    console.info("下拉了");
+  },
+
+  // 上拉加载，拉到底部触发
+  onReachBottom() {
+    console.info("你上拉了");
+    // 到这底部在这里需要做什么事情
+  },
   created() {}
 };
 </script>

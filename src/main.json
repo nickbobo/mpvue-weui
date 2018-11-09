@@ -41,10 +41,12 @@
         
         "pages/musicdetails/main",
         "pages/music-play/main",
+        "pages/music-search/main",
         
         "pages/amap/main"
     ],
     "window": {
+              "enablePullDownRefresh": true,
         "backgroundTextStyle": "light",
         "navigationBarBackgroundColor": "#fff",
         "navigationBarTitleText": "weui for mpvue",

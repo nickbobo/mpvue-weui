@@ -46,6 +46,12 @@ export default {
     };
   },
   onLoad() {
+    wx.getLocation({
+      type: 'wgs84',
+      success: (res) => {
+        console.info(res.latitude,res.longitude);
+      }
+    })
     let _this = this;
     wx.getStorage({
       key: "songData",
@@ -55,6 +61,9 @@ export default {
         _this.getActionMP3(_this.data);
       }
     });
+  },
+  onShow() {
+    
   },
   methods: {
     async getActionMP3(data) {
@@ -70,6 +79,7 @@ export default {
       this.innerAudioContext.autoplay = true;
       this.innerAudioContext.src = song.data;
       this.innerAudioContext.volume = 0.2;
+      wx.setNavigationBarTitle({ title: this.data.NAME });
       this.innerAudioContext.onPlay(() => {
         console.log("开始播放");
       });
