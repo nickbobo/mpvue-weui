@@ -7,7 +7,7 @@
 		"minified": true,
 		"newFeature": true
 	},
-	"miniprogramRoot": "./dist/",
+	"miniprogramRoot": "dist/",
 	"compileType": "miniprogram",
 	"appid": "wxe9ddca3d07f881ee",
 	"projectname": "mpvue-weui",
